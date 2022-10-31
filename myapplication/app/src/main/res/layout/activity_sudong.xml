@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/input_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="칼로리입력"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/input_et2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="탄수화물입력"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/input_et3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="단백질입력"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/input_et4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="지방입력"
+        android:imeOptions="actionDone" />
+
+    <Button
+        android:id="@+id/final_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="추가" />
+</LinearLayout>
