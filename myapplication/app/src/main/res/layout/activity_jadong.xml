@@ -1,72 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".jadong">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="#ffffff"
-        android:id="@+id/imageContainer">
-
-        <!--    사진 찍는 버튼    -->
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TAKE PICTURE"
-            android:textSize= "18dp"
-            android:id="@+id/takePicture"/>
-
-        <!--    사진 보여주는 이미지뷰    -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView"
-            />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_below="@id/imageContainer"
-        android:clickable="true"
-        android:id="@+id/OCRButtonContainer">
-
-        <!--    텍스트 추출 버튼    -->
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RUN OCR"
-            android:textSize= "18dp"
-            android:id="@+id/ocrButton"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/OCRButtonContainer"
-        android:padding="10dp">
+        android:orientation="horizontal">
 
-        <!--    텍스트 추출 뷰    -->
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/inputImagerBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="이곳에 결과 출력"
-            android:id="@+id/OCRTextView"
-            android:textSize="20dp"
-            android:textColor="#169cdf"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:background="#fff"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:text="Take Image"
             />
-    </RelativeLayout>
 
-</RelativeLayout>
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/recognizeTextBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:text="Recognize Text" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageIv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_baseline_image_24"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recognized Text"
+                android:layout_marginTop="10dp"
+                style="@style/TextAppearance.MaterialComponents.Headline6"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recognizedTextEt"
+                android:textSize="12sp"/>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>
