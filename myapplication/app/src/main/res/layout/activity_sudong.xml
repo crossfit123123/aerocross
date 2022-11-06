@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg"
     android:gravity="center">
 
     <EditText
@@ -10,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="칼로리입력"
+        android:textColor="@color/basecolor"
+        android:fontFamily="@font/gw"
         android:imeOptions="actionDone" />
 
     <EditText
@@ -17,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="탄수화물입력"
+        android:textColor="@color/basecolor"
+        android:fontFamily="@font/gw"
         android:imeOptions="actionDone" />
 
     <EditText
@@ -24,6 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="단백질입력"
+        android:textColor="@color/basecolor"
+        android:fontFamily="@font/gw"
         android:imeOptions="actionDone" />
 
     <EditText
@@ -31,11 +38,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="지방입력"
+        android:fontFamily="@font/gw"
         android:imeOptions="actionDone" />
 
     <Button
         android:id="@+id/final_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gw"
+        android:backgroundTint="@color/pastelpurple"
+        android:textColor="@color/basecolor"
         android:text="추가" />
 </LinearLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".mainactivity2">
 
     <Button
@@ -12,7 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:layout_marginEnd="63dp"
+        android:fontFamily="@font/gw"
         android:text="직접 기입"
+        android:textColor="@color/basecolor"
+        android:backgroundTint="@color/pastelpurple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toEndOf="@+id/mvbtn5"
@@ -24,7 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="73dp"
         android:layout_marginTop="108dp"
+        android:fontFamily="@font/gw"
         android:text="스캐닝"
+        android:textColor="@color/basecolor"
+        android:backgroundTint="@color/pastelpurple"
+        android:textColorLink="#250D0D"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="190dp"
+        android:fontFamily="@font/gw"
         android:text="칼로리"
+        android:textColor="@color/basecolor"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,13 +55,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="33dp"
+        android:fontFamily="@font/gw"
         android:text="탄수화물"
+        android:textColor="@color/basecolor"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/칼로리" />
 
     <EditText
         android:id="@+id/칼로리입력칸"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -105,6 +118,8 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="33dp"
         android:text="단백질"
+        android:textColor="@color/basecolor"
+        android:fontFamily="@font/gw"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/탄수화물" />
@@ -116,31 +131,26 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="33dp"
         android:text="지방"
+        android:textColor="@color/basecolor"
+        android:fontFamily="@font/gw"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/단백질" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="@android:dimen/thumbnail_height"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
+        android:layout_width="303dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/gw"
         android:text="영양성분 관리모드"
-        android:textSize="24sp"
+        android:textColor="@color/basecolor"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextNumberSigned"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="53dp"
-        android:ems="10"
-        android:inputType="numberSigned"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/지방입력칸" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

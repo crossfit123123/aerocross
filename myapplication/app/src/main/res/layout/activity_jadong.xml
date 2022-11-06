@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@drawable/bg"
     tools:context=".jadong">
 
     <LinearLayout
@@ -15,11 +16,14 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/inputImagerBtn"
+            android:fontFamily="@font/gw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:text="Take Image"
+            android:text="사진 촬영"
+            android:textColor="@color/basecolor"
+            android:backgroundTint="@color/pastelpurple"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -29,7 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:text="Recognize Text" />
+            android:fontFamily="@font/gw"
+            android:backgroundTint="@color/pastelpurple"
+            android:textColor="@color/basecolor"
+            android:text="OCR" />
 
     </LinearLayout>
 
@@ -46,14 +53,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_baseline_image_24"
+                android:src="@drawable/bbb"
                 app:strokeWidth="2dp" />
 
             <TextView
                 android:layout_width="match_parent"
+                android:fontFamily="@font/gw"
                 android:layout_height="wrap_content"
-                android:text="Recognized Text"
                 android:layout_marginTop="10dp"
+
                 style="@style/TextAppearance.MaterialComponents.Headline6"/>
             <EditText
                 android:layout_width="match_parent"
