@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/칼로리" />
 
     <EditText
-        android:id="@+id/칼로리입력칸"
+        android:id="@+id/칼로리표시칸"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <EditText
-        android:id="@+id/탄수화물입력칸"
+        android:id="@+id/탄수화물표시칸"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -87,10 +87,10 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toEndOf="@+id/탄수화물"
-        app:layout_constraintTop_toBottomOf="@+id/칼로리입력칸" />
+        app:layout_constraintTop_toBottomOf="@+id/칼로리표시칸" />
 
     <EditText
-        android:id="@+id/단백질입력칸"
+        android:id="@+id/단백질표시칸"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
@@ -98,10 +98,10 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toEndOf="@+id/단백질"
-        app:layout_constraintTop_toBottomOf="@+id/탄수화물입력칸" />
+        app:layout_constraintTop_toBottomOf="@+id/탄수화물표시칸" />
 
     <EditText
-        android:id="@+id/지방입력칸"
+        android:id="@+id/지방표시칸"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -109,7 +109,7 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toEndOf="@+id/지방"
-        app:layout_constraintTop_toBottomOf="@+id/단백질입력칸" />
+        app:layout_constraintTop_toBottomOf="@+id/단백질표시칸" />
 
     <TextView
         android:id="@+id/단백질"

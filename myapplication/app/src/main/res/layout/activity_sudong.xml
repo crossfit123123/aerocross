@@ -5,44 +5,51 @@
     android:orientation="vertical"
     android:background="@drawable/bg"
     android:gravity="center">
-
     <EditText
-        android:id="@+id/input_et"
+        android:id="@+id/칼로리입력칸"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="칼로리입력"
         android:textColor="@color/basecolor"
         android:fontFamily="@font/gw"
-        android:imeOptions="actionDone" />
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:digits="0123456789"/>
 
     <EditText
-        android:id="@+id/input_et2"
+        android:id="@+id/탄수화물입력칸"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="탄수화물입력"
         android:textColor="@color/basecolor"
         android:fontFamily="@font/gw"
-        android:imeOptions="actionDone" />
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:digits="0123456789"/>
 
     <EditText
-        android:id="@+id/input_et3"
+        android:id="@+id/단백질입력칸"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="단백질입력"
         android:textColor="@color/basecolor"
         android:fontFamily="@font/gw"
-        android:imeOptions="actionDone" />
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:digits="0123456789"/>
 
     <EditText
-        android:id="@+id/input_et4"
+        android:id="@+id/지방입력칸"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="지방입력"
         android:fontFamily="@font/gw"
-        android:imeOptions="actionDone" />
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:digits="0123456789"/>
 
     <Button
-        android:id="@+id/final_btn"
+        android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gw"

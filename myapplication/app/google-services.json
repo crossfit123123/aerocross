@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1021471297803",
+    "firebase_url": "https://crossfit-c7857-default-rtdb.firebaseio.com",
+    "project_id": "crossfit-c7857",
+    "storage_bucket": "crossfit-c7857.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021471297803:android:02f1529257cbf8646c520e",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021471297803-o9ct385v2kvbhmba4i9vsq5j9poqqgna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjHHAjJF6z6Y9n_S-FcR0yrntvVzRZaVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021471297803-o9ct385v2kvbhmba4i9vsq5j9poqqgna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

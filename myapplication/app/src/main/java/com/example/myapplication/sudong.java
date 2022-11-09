@@ -8,37 +8,44 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class sudong extends AppCompatActivity {
 
-    EditText editText;
-    Button button;
+    EditText writecal;
+    EditText writecalbo;
+    EditText writeprotein;
+    EditText writefat;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sudong);
-        init();
-        SettingListener();
-    }
-
-    private void init() {
-        editText = findViewById(R.id.input_et);
-        button = findViewById(R.id.final_btn); //xml에서 생성한 id 매치
-    }
-
-    private void SettingListener() {
-        //버튼에 클릭 이벤트 적용
+        Button button = findViewById(R.id.add_btn); //xml에서 생성한 id 매치
+        writecal = findViewById(R.id.칼로리입력칸);
+        writecalbo = findViewById(R.id.탄수화물입력칸);
+        writeprotein = findViewById(R.id.단백질입력칸);
+        writefat = findViewById(R.id.지방입력칸);
+//        SettingListener();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String input = editText.getText().toString(); //editText에 입력한 문자열을 얻어 온다.
-                //인텐트 선언 및 정의
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+                myRef.child("user").child("eatcalorie").setValue(Integer.parseInt(writecal.getText().toString()));
+                myRef.child("user").child("eatcalbo").setValue(Integer.parseInt(writecalbo.getText().toString()));
+                myRef.child("user").child("eatprotein").setValue(Integer.parseInt(writeprotein.getText().toString()));
+                myRef.child("user").child("eatfat").setValue(Integer.parseInt(writefat.getText().toString()));
+
                 Intent intent = new Intent(sudong.this, mainactivity2.class);
                 //입력한 input값을 intent로 전달한다.
-                intent.putExtra("text", input);
                 //액티비티 이동
                 startActivity(intent);
             }
         });
+
     }
 }
+
