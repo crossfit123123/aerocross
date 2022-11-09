@@ -23,9 +23,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    task wrapper(type: Wrapper){
+        gradleVersion = '7.0'
     }
 }
 
@@ -59,3 +64,5 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-database:20.0.4'
 
 }
+
+tasks.register("prepareKotlinBuildScriptModel"){}
