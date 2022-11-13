@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 public class sudong extends AppCompatActivity {
 
     EditText writecal;
@@ -37,10 +37,47 @@ public class sudong extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();
-                myRef.child("user").child("eatcalorie").setValue(Integer.parseInt(writecal.getText().toString()));
+
+                myRef.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        user group = snapshot.getValue(user.class);
+
+                        int cal = group.getEatcalorie();
+                        int cal_temp = Integer.parseInt(writecal.getText().toString());
+                        int sum1 = cal + cal_temp;
+
+                        int calbo = group.getEatcalbo();
+                        int calbo_temp = Integer.parseInt(writecalbo.getText().toString());
+                        int sum2 = calbo + calbo_temp;
+
+                        int protein = group.getEatprotein();
+                        int protein_temp = Integer.parseInt(writeprotein.getText().toString());
+                        int sum3 = protein + protein_temp;
+
+                        int fat = group.getEatfat();
+                        int fat_temp = Integer.parseInt(writefat.getText().toString());
+                        int sum4 = fat + fat_temp;
+
+
+                        myRef.child("user").child("eatcalorie").setValue(sum1);
+                        myRef.child("user").child("eatcalbo").setValue(sum2);
+                        myRef.child("user").child("eatprotein").setValue(sum3);
+                        myRef.child("user").child("eatfat").setValue(sum4);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                /*myRef.child("user").child("eatcalorie").setValue(Integer.parseInt(writecal.getText().toString()));
                 myRef.child("user").child("eatcalbo").setValue(Integer.parseInt(writecalbo.getText().toString()));
                 myRef.child("user").child("eatprotein").setValue(Integer.parseInt(writeprotein.getText().toString()));
-                myRef.child("user").child("eatfat").setValue(Integer.parseInt(writefat.getText().toString()));
+                myRef.child("user").child("eatfat").setValue(Integer.parseInt(writefat.getText().toString()));*/
 
                 Intent intent = new Intent(sudong.this, mainactivity2.class);
                 //입력한 input값을 intent로 전달한다.
@@ -50,8 +87,4 @@ public class sudong extends AppCompatActivity {
         });
 
     }
-
-
-    }
-
-
+}
