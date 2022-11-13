@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class mainactivity2 extends AppCompatActivity {
 
-    private Button movebutton5,movebutton6;
+    private Button movebutton5,movebutton6,resetbutton;
 
     TextView eatcal;
     TextView eatcalbo;
@@ -116,5 +116,25 @@ public class mainactivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        resetbutton= (Button)findViewById(R.id.reset);
+        resetbutton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+                myRef.child("user").child("eatcalorie").setValue(0);
+                myRef.child("user").child("eatcalbo").setValue(0);
+                myRef.child("user").child("eatprotein").setValue(0);
+                myRef.child("user").child("eatfat").setValue(0);
+
+
+            }
+        });
     }
+
+
+
+
+
 }
