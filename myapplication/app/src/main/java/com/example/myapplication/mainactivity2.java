@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class mainactivity2 extends AppCompatActivity {
 
-    private Button movebutton5,movebutton6,resetbutton;
+    private Button movebutton6,resetbutton;
 
     TextView eatcal;
     TextView eatcalbo;
@@ -30,10 +30,10 @@ public class mainactivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity2);
 
-        eatcal=findViewById(R.id.칼로리표시칸);
-        eatcalbo=findViewById(R.id.탄수화물표시칸);
-        eatprotein=findViewById(R.id.단백질표시칸);
-        eatfat=findViewById(R.id.지방표시칸);
+        eatcal=findViewById(R.id.섭취칼로리표시칸);
+        eatcalbo=findViewById(R.id.섭취탄수화물표시칸);
+        eatprotein=findViewById(R.id.섭취단백질표시칸);
+        eatfat=findViewById(R.id.섭취지방표시칸);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -95,15 +95,6 @@ public class mainactivity2 extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 eatfat.setText("error");
-            }
-        });
-
-        movebutton5 = (Button)findViewById(R.id.mvbtn5);
-        movebutton5.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), jadong.class);
-                startActivity(intent);
             }
         });
 

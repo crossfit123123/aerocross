@@ -21,7 +21,7 @@ public class startactivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(startactivity.this, MainActivity1.class);
+                Intent intent = new Intent(startactivity.this, mainactivity3.class);
                 startActivity(intent);
 
             }

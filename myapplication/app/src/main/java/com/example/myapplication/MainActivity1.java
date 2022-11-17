@@ -13,12 +13,12 @@ public class MainActivity1 extends AppCompatActivity {
     private Button mvbtn1;
     private Button mvbtn2;
     private Button mvbtn3;
+    private Button scanbtn;
 
 
-
-    public MainActivity1(){
-
-    }
+//    public MainActivity1(){
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,15 @@ public class MainActivity1 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        scanbtn = (Button)findViewById(R.id.scanbtn);
 
+        scanbtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), jadong.class);
+
+                startActivity(intent);
+            }
+        }));
 }
         }

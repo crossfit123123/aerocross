@@ -143,7 +143,7 @@ public class jadong extends AppCompatActivity {
     private void showInputImageDialog() {
         PopupMenu popupMenu =  new PopupMenu(this,inputImageBtn);
         popupMenu.getMenu().add(Menu.NONE,1,1,"Camera");
-        popupMenu.getMenu().add(Menu.NONE,2,2,"Gallery");
+//        popupMenu.getMenu().add(Menu.NONE,2,2,"Gallery");
         popupMenu.show();
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override

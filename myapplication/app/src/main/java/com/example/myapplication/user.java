@@ -9,6 +9,7 @@ public class user {
     private int Eatfat;
     private int Eatprotein;
 
+
     public user(){}
 
     public Integer getEatcalorie(){
@@ -49,4 +50,48 @@ public class user {
         this.Eatfat = Eatfat;
         this.Eatprotein = Eatprotein;
     }
+
+    private String Sex;
+    private int Age;
+    private int Height;
+    private int Weight;
+    private int Activitylevel;
+
+    public String getSex(){
+        return Sex;
+    }
+    public void setSex(String Sex){
+        this.Sex = Sex;
+    }
+
+    public int getAge(){
+        return Age;
+    }
+    public void setAge(int Age){
+        this.Age = Age;
+    }
+
+    public int getHeight(){
+        return Height;
+    }
+    public void setHeight(int Height){
+        this.Height = Height;
+    }
+
+    public int getWeight(){
+        return Weight;
+    }
+    public void setWeight(int Weight){
+        this.Weight = Weight;
+    }
+
+    public int getActivitylevel(){
+        return Activitylevel;
+    }
+    public void setActivitylevel(int Activitylevel){
+        this.Activitylevel = Activitylevel;
+    }
+
+
+
 }

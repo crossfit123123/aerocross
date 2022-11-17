@@ -24,32 +24,30 @@
 
     <Button
         android:id="@+id/mvbtn1"
-        android:layout_width="@android:dimen/thumbnail_height"
-        android:layout_height="wrap_content"
+        android:layout_width="179dp"
+        android:layout_height="55dp"
         android:layout_marginTop="30dp"
+        android:backgroundTint="@color/pastelpurple"
         android:fontFamily="@font/gw"
         android:text="영양성분 관리"
         android:textColor="@color/basecolor"
-        android:backgroundTint="@color/pastelpurple"
-        app:layout_constraintBottom_toTopOf="@+id/mvbtn3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mvbtn2" />
+        app:layout_constraintTop_toBottomOf="@+id/scanbtn" />
 
     <Button
         android:id="@+id/mvbtn2"
-        android:layout_width="@android:dimen/thumbnail_height"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/gw"
-        android:text="개인정보 기입"
-        android:textColor="@color/basecolor"
-        app:layout_constraintBottom_toTopOf="@+id/mvbtn1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="94dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/pastelpurple"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:fontFamily="@font/gw"
+        android:text="개인정보 관리"
+        android:textColor="@color/basecolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/mvbtn3"
@@ -65,5 +63,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mvbtn1" />
+
+    <Button
+        android:id="@+id/scanbtn"
+        android:layout_width="105dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="50dp"
+        android:text="SCAN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
