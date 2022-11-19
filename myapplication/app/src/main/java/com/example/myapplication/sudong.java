@@ -38,7 +38,7 @@ public class sudong extends AppCompatActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();
 
-                myRef.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -61,10 +61,10 @@ public class sudong extends AppCompatActivity {
                         int sum4 = fat + fat_temp;
 
 
-                        myRef.child("user").child("eatcalorie").setValue(sum1);
-                        myRef.child("user").child("eatcalbo").setValue(sum2);
-                        myRef.child("user").child("eatprotein").setValue(sum3);
-                        myRef.child("user").child("eatfat").setValue(sum4);
+                        myRef.child("user").child("nutrition").child("eatcalorie").setValue(sum1);
+                        myRef.child("user").child("nutrition").child("eatcalbo").setValue(sum2);
+                        myRef.child("user").child("nutrition").child("eatprotein").setValue(sum3);
+                        myRef.child("user").child("nutrition").child("eatfat").setValue(sum4);
 
                     }
 

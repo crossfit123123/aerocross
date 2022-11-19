@@ -57,6 +57,16 @@
         android:imeOptions="actionDone"
         android:inputType="number" />
 
+    <EditText
+        android:id="@+id/지출량한도입력칸"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:fontFamily="@font/gw"
+        android:hint="지출량한도입력"
+        android:imeOptions="actionDone"
+        android:inputType="number" />
+
     <Button
         android:id="@+id/add_btn2"
         android:layout_width="wrap_content"

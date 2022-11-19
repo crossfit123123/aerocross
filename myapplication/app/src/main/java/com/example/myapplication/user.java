@@ -93,5 +93,14 @@ public class user {
     }
 
 
+    private int totalcost;
+    private int limitcost;
+    public int getTotalcost() { return totalcost;}
+    public void setTotalcost(int totalcost) {this.totalcost=totalcost;}
+    public int getLimitcost() { return  limitcost;}
+    public void setLimitcost(int limitcost) {this.limitcost=limitcost;}
+
+
+
 
 }

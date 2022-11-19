@@ -22,7 +22,7 @@ public class mainactivity3 extends AppCompatActivity {
     EditText writeheight;
     EditText writeweight;
     EditText writeactivitylevel;
-
+    EditText writelimitcost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,119 +33,59 @@ public class mainactivity3 extends AppCompatActivity {
         writeheight = findViewById(R.id.신장입력칸);
         writeweight = findViewById(R.id.체중입력칸);
         writeactivitylevel=findViewById(R.id.활동지수입력칸);
-
+        writelimitcost=findViewById(R.id.지출량한도입력칸);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
-        myRef.child("user").child("sex").addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("user").child("user_information").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value=snapshot.getValue(String.class);
-                writesex.setText(value);
-//                *문자열 받아오기*
+                user group = snapshot.getValue(user.class);
+                writesex.setText(group.getSex());
+                writeage.setText(Integer.toString(group.getAge()));
+                writeheight.setText(Integer.toString(group.getHeight()));
+                writeweight.setText(Integer.toString(group.getWeight()));
+                writeactivitylevel.setText(Integer.toString(group.getActivitylevel()));
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 writesex.setText("error");
-            }
-        });
-
-        myRef.child("user").child("age").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int value=(int)snapshot.getValue(Integer.class);
-                writeage.setText(Integer.toString(value));
-
-//                *문자열 받아오기*
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
                 writeage.setText("error");
-            }
-        });
-
-        myRef.child("user").child("height").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int value=(int)snapshot.getValue(Integer.class);
-                writeheight.setText(Integer.toString(value));
-
-//                *문자열 받아오기*
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
                 writeheight.setText("error");
-            }
-        });
-
-        myRef.child("user").child("weight").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int value=(int)snapshot.getValue(Integer.class);
-                writeweight.setText(Integer.toString(value));
-
-//                *문자열 받아오기*
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
                 writeweight.setText("error");
-            }
-        });
-
-        myRef.child("user").child("activitylevel").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int value=(int)snapshot.getValue(Integer.class);
-                writeactivitylevel.setText(Integer.toString(value));
-
-//                *문자열 받아오기*
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
                 writeactivitylevel.setText("error");
             }
         });
 
+        myRef.child("user").child("expenditure").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user group = snapshot.getValue(user.class);
+                writelimitcost.setText(Integer.toString(group.getLimitcost()));
+            }
 
-        //        SettingListener();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+            //        SettingListener();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();
+                myRef.child("user").child("user_information").child("sex").setValue(writesex.getText().toString());
+                myRef.child("user").child("user_information").child("age").setValue(Integer.parseInt(writeage.getText().toString()));
+                myRef.child("user").child("user_information").child("height").setValue(Integer.parseInt(writeheight.getText().toString()));
+                myRef.child("user").child("user_information").child("weight").setValue(Integer.parseInt(writeweight.getText().toString()));
+                myRef.child("user").child("user_information").child("activitylevel").setValue(Integer.parseInt(writeactivitylevel.getText().toString()));
 
-                myRef.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user group = snapshot.getValue(user.class);
-
-
-                        String sex = writesex.getText().toString();
-                        myRef.child("user").child("sex").setValue(sex);
-
-                        int age =Integer.parseInt(writeage.getText().toString());
-                        myRef.child("user").child("age").setValue(age);
-
-                        int height =Integer.parseInt(writeheight.getText().toString());
-                        myRef.child("user").child("height").setValue(height);
-
-                        int weight =Integer.parseInt(writeweight.getText().toString());
-                        myRef.child("user").child("weight").setValue(weight);
-
-                        int activitylevel =Integer.parseInt(writeactivitylevel.getText().toString());
-                        myRef.child("user").child("activitylevel").setValue(activitylevel);
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                myRef.child("user").child("expenditure").child("limitcost").setValue(Integer.parseInt(writelimitcost.getText().toString()));
                 Intent intent = new Intent(mainactivity3.this, MainActivity1.class);
                 startActivity(intent);
             }
