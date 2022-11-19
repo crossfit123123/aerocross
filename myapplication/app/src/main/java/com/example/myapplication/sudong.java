@@ -74,11 +74,6 @@ public class sudong extends AppCompatActivity {
                     }
                 });
 
-                /*myRef.child("user").child("eatcalorie").setValue(Integer.parseInt(writecal.getText().toString()));
-                myRef.child("user").child("eatcalbo").setValue(Integer.parseInt(writecalbo.getText().toString()));
-                myRef.child("user").child("eatprotein").setValue(Integer.parseInt(writeprotein.getText().toString()));
-                myRef.child("user").child("eatfat").setValue(Integer.parseInt(writefat.getText().toString()));*/
-
                 Intent intent = new Intent(sudong.this, mainactivity2.class);
                 //입력한 input값을 intent로 전달한다.
                 //액티비티 이동

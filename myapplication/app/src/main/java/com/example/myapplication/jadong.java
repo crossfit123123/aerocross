@@ -54,11 +54,8 @@ public class jadong extends AppCompatActivity {
     private static final String TAG = "MAIN_TAG";
     private Uri imageUri = null;
     private static final int CAMERA_REQUEST_CODE = 100;
-//    private static final int STORAGE_REQUEST_CODE = 101;
-
 
     private String[] cameraPermissions;
-//    private String[] storagePermissions;
 
     private ProgressDialog progressDialog;
     private TextRecognizer textRecognizer;
@@ -77,8 +74,7 @@ public class jadong extends AppCompatActivity {
 
         //init arrays of permissions required for camera, gallery
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-//
-//        storagePermissions =new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -87,7 +83,12 @@ public class jadong extends AppCompatActivity {
         inputImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pickImageCamera();
+                if(checkCameraPermissions()){
+                    pickImageCamera();
+                }
+                else{
+                    requestCameraPermissions();
+                };
             }
         });
 
@@ -138,30 +139,6 @@ public class jadong extends AppCompatActivity {
         }
     }
 
-
-
-/*    private void showInputImageDialog() {
-        PopupMenu popupMenu =  new PopupMenu(this,inputImageBtn);
-        popupMenu.getMenu().add(Menu.NONE,1,1,"Camera");
-        popupMenu.getMenu().add(Menu.NONE,2,2,"Gallery");
-        popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Log.d(TAG,"onMenuItemClick : Camera Clicked..");
-
-                if(checkCameraPermissions()){
-                    pickImageCamera();
-                }
-                else{
-                    requestCameraPermissions();
-                }
-                return true;
-            }
-        });
-
-    }*/
-
     private void pickImageCamera(){
         Log.d(TAG,"pickImageCamera :");
         ContentValues values = new ContentValues();
@@ -191,17 +168,6 @@ public class jadong extends AppCompatActivity {
             }
     );
 
-/*    private boolean checkStoragePermission(){
-        boolean result = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == (PackageManager.PERMISSION_GRANTED);
-        return result;
-
-    }
-    private void requestStoragePermission(){
-        ActivityCompat.requestPermissions(this,storagePermissions,STORAGE_REQUEST_CODE);
-
-    }*/
-
     private boolean checkCameraPermissions(){
         boolean cameraResult = ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)
                 == (PackageManager.PERMISSION_GRANTED);
@@ -219,7 +185,6 @@ public class jadong extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults.length>0){
             boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-//            boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
             if(cameraAccepted){
                 pickImageCamera();
@@ -227,12 +192,6 @@ public class jadong extends AppCompatActivity {
             else{
                 Toast.makeText(this, "Camera permissions are required",Toast.LENGTH_SHORT).show();
             }
-/*            if(cameraAccepted && storageAccepted){
-                pickImageCamera();
-            }
-            else{
-                Toast.makeText(this, "Camera and Storage permissions are required",Toast.LENGTH_SHORT).show();
-            }*/
         }
 
         else{

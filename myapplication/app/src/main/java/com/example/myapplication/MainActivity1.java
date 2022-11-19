@@ -15,11 +15,6 @@ public class MainActivity1 extends AppCompatActivity {
     private Button mvbtn3;
     private Button scanbtn;
 
-
-//    public MainActivity1(){
-//
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

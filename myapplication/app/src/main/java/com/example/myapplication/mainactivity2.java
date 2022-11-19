@@ -41,7 +41,7 @@ public class mainactivity2 extends AppCompatActivity {
         myRef.child("user").child("eatcalorie").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-////              String value=snapshot.getValue(String.class);
+//              String value=snapshot.getValue(String.class);
 //                eatcal.setText(snapshot.getValue(String.class));
 //                *문자열 받아오기*
                 int value = (int)snapshot.getValue(Integer.class);
@@ -56,7 +56,7 @@ public class mainactivity2 extends AppCompatActivity {
         myRef.child("user").child("eatcalbo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-////              String value=snapshot.getValue(String.class);
+//              String value=snapshot.getValue(String.class);
 //                eatcal.setText(snapshot.getValue(String.class));
 //                *문자열 받아오기*
                 int value = (int)snapshot.getValue(Integer.class);
@@ -71,7 +71,7 @@ public class mainactivity2 extends AppCompatActivity {
         myRef.child("user").child("eatprotein").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-////              String value=snapshot.getValue(String.class);
+//              String value=snapshot.getValue(String.class);
 //                eatcal.setText(snapshot.getValue(String.class));
 //                *문자열 받아오기*
                 int value = (int)snapshot.getValue(Integer.class);
@@ -86,7 +86,7 @@ public class mainactivity2 extends AppCompatActivity {
         myRef.child("user").child("eatfat").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-////              String value=snapshot.getValue(String.class);
+//              String value=snapshot.getValue(String.class);
 //                eatcal.setText(snapshot.getValue(String.class));
 //                *문자열 받아오기*
                 int value = (int)snapshot.getValue(Integer.class);
