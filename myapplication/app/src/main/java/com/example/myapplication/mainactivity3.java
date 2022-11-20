@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -17,24 +18,28 @@ import com.google.firebase.database.ValueEventListener;
 
 public class mainactivity3 extends AppCompatActivity {
 
-    EditText writesex;
     EditText writeage;
     EditText writeheight;
     EditText writeweight;
     EditText writeactivitylevel;
     EditText writelimitcost;
+
+    CheckBox checkBoxmale;
+    CheckBox checkBoxfemale;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity3);
         Button button = findViewById(R.id.add_btn2); //xml에서 생성한 id 매치
-        writesex = findViewById(R.id.성별입력칸);
         writeage = findViewById(R.id.나이입력칸);
         writeheight = findViewById(R.id.신장입력칸);
         writeweight = findViewById(R.id.체중입력칸);
-        writeactivitylevel=findViewById(R.id.활동지수입력칸);
-        writelimitcost=findViewById(R.id.지출량한도입력칸);
+        writeactivitylevel = findViewById(R.id.활동지수입력칸);
+        writelimitcost = findViewById(R.id.지출량한도입력칸);
 
+        checkBoxmale = (CheckBox) findViewById(R.id.chbmale);
+        checkBoxfemale = (CheckBox) findViewById(R.id.chbfemale);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
@@ -42,16 +47,42 @@ public class mainactivity3 extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user group = snapshot.getValue(user.class);
-                writesex.setText(group.getSex());
-                writeage.setText(Integer.toString(group.getAge()));
-                writeheight.setText(Integer.toString(group.getHeight()));
-                writeweight.setText(Integer.toString(group.getWeight()));
-                writeactivitylevel.setText(Integer.toString(group.getActivitylevel()));
+
+                if (group.getSex()==null) {
+                    checkBoxmale.setChecked(false);
+                    checkBoxfemale.setChecked(false);
+                } else if (group.getSex().equals("남")) {
+                    checkBoxmale.setChecked(true);
+                    checkBoxfemale.setChecked(false);
+                } else if (group.getSex().equals("여")){
+                   checkBoxfemale.setChecked(true);
+                    checkBoxmale.setChecked(false);}
+                    else
+                {   checkBoxmale.setChecked(false);
+                    checkBoxfemale.setChecked(false);}
+
+
+                if (group.getAge() == 0)
+                    writeage.setText("");
+                else
+                    writeage.setText(Integer.toString(group.getAge()));
+                if (group.getHeight() == 0)
+                    writeheight.setText("");
+                else
+                    writeheight.setText(Integer.toString(group.getHeight()));
+                if (group.getWeight() == 0)
+                    writeweight.setText("");
+                else
+                    writeweight.setText(Integer.toString(group.getWeight()));
+                if (group.getActivitylevel() == 0)
+                    writeactivitylevel.setText("");
+                else
+                    writeactivitylevel.setText(Integer.toString(group.getActivitylevel()));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                writesex.setText("error");
+
                 writeage.setText("error");
                 writeheight.setText("error");
                 writeweight.setText("error");
@@ -63,7 +94,10 @@ public class mainactivity3 extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user group = snapshot.getValue(user.class);
-                writelimitcost.setText(Integer.toString(group.getLimitcost()));
+                if (group.getLimitcost() == 0)
+                    writelimitcost.setText("");
+                else
+                    writelimitcost.setText(Integer.toString(group.getLimitcost()));
             }
 
             @Override
@@ -73,13 +107,18 @@ public class mainactivity3 extends AppCompatActivity {
         });
 
 
-            //        SettingListener();
+        //        SettingListener();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference();
-                myRef.child("user").child("user_information").child("sex").setValue(writesex.getText().toString());
+
+                if (checkBoxmale.isChecked())
+                    myRef.child("user").child("user_information").child("sex").setValue("남");
+                else if (checkBoxfemale.isChecked())
+                    myRef.child("user").child("user_information").child("sex").setValue("여");
+
                 myRef.child("user").child("user_information").child("age").setValue(Integer.parseInt(writeage.getText().toString()));
                 myRef.child("user").child("user_information").child("height").setValue(Integer.parseInt(writeheight.getText().toString()));
                 myRef.child("user").child("user_information").child("weight").setValue(Integer.parseInt(writeweight.getText().toString()));
@@ -93,3 +132,4 @@ public class mainactivity3 extends AppCompatActivity {
 
     }
 }
+
