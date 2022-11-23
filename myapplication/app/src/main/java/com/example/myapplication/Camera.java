@@ -1,3 +1,8 @@
+ /*Camera Class
+  *Gunneopyeon.eta
+  *2022-11-23
+ */
+
 package com.example.myapplication;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -11,23 +16,15 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.media.MediaDataSource;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,17 +37,18 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+/*
+Camera 는 카메라 권한을 얻어 사진을 촬영 후 텍스트화 하는 클래스
+ */
 
+public class Camera extends AppCompatActivity {
 
-public class jadong extends AppCompatActivity {
-    //UI views
     private MaterialButton inputImageBtn;
     private MaterialButton recognizeTextBtn;
     private ShapeableImageView imageIv;
     private EditText recognizedTextEt;
-    //TAG
+
     private static final String TAG = "MAIN_TAG";
     private Uri imageUri = null;
     private static final int CAMERA_REQUEST_CODE = 100;
@@ -63,16 +61,16 @@ public class jadong extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jadong);
+        setContentView(R.layout.activity_camera);
 
-        //init UI views
+
 
         inputImageBtn = findViewById(R.id.inputImagerBtn);
         recognizeTextBtn = findViewById(R.id.recognizeTextBtn);
         imageIv = findViewById(R.id.imageIv);
         recognizedTextEt = findViewById(R.id.recognizedTextEt);
 
-        //init arrays of permissions required for camera, gallery
+//        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         progressDialog = new ProgressDialog(this);
@@ -81,6 +79,7 @@ public class jadong extends AppCompatActivity {
 
         textRecognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
         inputImageBtn.setOnClickListener(new View.OnClickListener() {
+            //카메라 허가 요청
             @Override
             public void onClick(View v) {
                 if(checkCameraPermissions()){
@@ -91,20 +90,20 @@ public class jadong extends AppCompatActivity {
                 };
             }
         });
-
+        //Uri
         recognizeTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (imageUri == null){
-                    Toast.makeText(jadong.this, "Pick image first..",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Camera.this, "Pick image first..",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    recognizeTextFromImage();
+                    recognizeTextFromImage(); /*이미지로부터 텍스트 인식 */
                 }
             }
         });
     }
-
+    /*텍스트화 성공여부 확인 및 결과도출*/
     private void recognizeTextFromImage() {
         Log.d(TAG, "recognizeTextFromImage");
         progressDialog.setMessage("Preparing image..");
@@ -115,7 +114,9 @@ public class jadong extends AppCompatActivity {
             InputImage inputImage = InputImage.fromFilePath(this, imageUri);
             progressDialog.setMessage("Recognizing text..");
             Task<Text> textTaskResult = textRecognizer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
-                        @Override
+
+                //텍스트화 성공
+                @Override
                         public void onSuccess(Text text) {
                             progressDialog.dismiss();
                             String recognizedText = text.getText();
@@ -124,11 +125,12 @@ public class jadong extends AppCompatActivity {
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
+                        //텍스트화 실패
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
                             Log.e(TAG,"Onfailure:",e);
-                            Toast.makeText(jadong.this,"Failed recognizing text due to"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Camera.this,"Failed recognizing text due to"+e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -162,7 +164,7 @@ public class jadong extends AppCompatActivity {
                     }
                     else{
                         Log.d(TAG,"onActivityResult:");
-                        Toast.makeText(jadong.this,"Cancelled",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Camera.this,"Cancelled",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -171,9 +173,7 @@ public class jadong extends AppCompatActivity {
     private boolean checkCameraPermissions(){
         boolean cameraResult = ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)
                 == (PackageManager.PERMISSION_GRANTED);
-        boolean storageResult = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == (PackageManager.PERMISSION_GRANTED);
-        return cameraResult && storageResult ;
+        return cameraResult;
     }
 
     private void requestCameraPermissions(){

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class MainActivity1 extends AppCompatActivity {
+public class Main extends AppCompatActivity {
 
     private Button mvbtn1;
     private Button mvbtn2;
@@ -25,7 +25,7 @@ public class MainActivity1 extends AppCompatActivity {
         mvbtn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), mainactivity2.class);
+                Intent intent = new Intent(getApplicationContext(), ManageNutrient.class);
                 startActivity(intent);
             }
         });
@@ -35,7 +35,7 @@ public class MainActivity1 extends AppCompatActivity {
         mvbtn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), mainactivity3.class);
+                Intent intent = new Intent(getApplicationContext(), ManagePrivacy.class);
                 startActivity(intent);
             }
         });
@@ -45,7 +45,7 @@ public class MainActivity1 extends AppCompatActivity {
         mvbtn3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), mainactivity4.class);
+                Intent intent = new Intent(getApplicationContext(), ExpManager.class);
 
                 startActivity(intent);
             }
@@ -55,7 +55,7 @@ public class MainActivity1 extends AppCompatActivity {
         scanbtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), jadong.class);
+                Intent intent = new Intent(getApplicationContext(), Camera.class);
 
                 startActivity(intent);
             }

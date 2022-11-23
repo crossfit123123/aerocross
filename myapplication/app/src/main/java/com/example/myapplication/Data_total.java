@@ -3,14 +3,14 @@ package com.example.myapplication;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class user {
+public class Data_total {
     private int Eatcalorie;
     private int Eatcalbo;
     private int Eatfat;
     private int Eatprotein;
 
 
-    public user(){}
+    public Data_total(){}
 
     public Integer getEatcalorie(){
         return Eatcalorie;
@@ -44,7 +44,7 @@ public class user {
         this.Eatprotein = Eatprotein;
     }
 
-    public user(int Eatcalorie, int Eatcalbo, int Eatfat, int Eatprotein) {
+    public Data_total(int Eatcalorie, int Eatcalbo, int Eatfat, int Eatprotein) {
         this.Eatcalorie = Eatcalorie;
         this.Eatcalbo = Eatcalbo;
         this.Eatfat = Eatfat;
@@ -55,7 +55,7 @@ public class user {
     private int Age;
     private int Height;
     private int Weight;
-    private int Activitylevel;
+    private float Activitylevel;
 
     public String getSex(){
         return Sex;
@@ -85,10 +85,10 @@ public class user {
         this.Weight = Weight;
     }
 
-    public int getActivitylevel(){
+    public float getActivitylevel(){
         return Activitylevel;
     }
-    public void setActivitylevel(int Activitylevel){
+    public void setActivitylevel(float Activitylevel){
         this.Activitylevel = Activitylevel;
     }
 

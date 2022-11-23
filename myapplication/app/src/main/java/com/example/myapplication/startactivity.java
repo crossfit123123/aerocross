@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,7 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class startactivity extends AppCompatActivity {
+public class Startactivity extends AppCompatActivity {
 
 
     @Override
@@ -30,13 +27,13 @@ public class startactivity extends AppCompatActivity {
         myRef.child("user").child("user_information").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user group = snapshot.getValue(user.class);
+                Data_total group = snapshot.getValue(Data_total.class);
                 if (group.getSex()==null || group.getAge() == 0 || group.getHeight() == 0 || group.getWeight()==0
                         )
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(startactivity.this, mainactivity3.class);
+                            Intent intent = new Intent(Startactivity.this, ManagePrivacy.class);
                             startActivity(intent);
 //
                         }
@@ -45,7 +42,7 @@ public class startactivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(startactivity.this, MainActivity1.class);
+                            Intent intent = new Intent(Startactivity.this, Main.class);
                             startActivity(intent);
 //
                         }

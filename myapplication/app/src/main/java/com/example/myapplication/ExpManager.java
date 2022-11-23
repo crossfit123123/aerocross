@@ -17,23 +17,16 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.widget.ProgressBar;
-import android.os.Bundle;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Switch;
 
-public class mainactivity4 extends AppCompatActivity  {
+public class ExpManager extends AppCompatActivity  {
     TextView totalcost;
     TextView limitcost;
     TextView circletext;
@@ -48,7 +41,7 @@ public class mainactivity4 extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainactivity4);
+        setContentView(R.layout.activity_expmanager);
 
 
         totalcost=findViewById(R.id.aaa2);
@@ -107,7 +100,7 @@ public class mainactivity4 extends AppCompatActivity  {
 //                int value = (int)snapshot.getValue(Integer.class); // 저장된 값을 숫자로 받아오기
 ////                    myRef.child("user").child("totalcost").setValue(value); // 저장
 //                totalcost.setText(Integer.toString(value));
-                user group = snapshot.getValue(user.class);
+                Data_total group = snapshot.getValue(Data_total.class);
 
                 totalcost.setText(Integer.toString(group.getTotalcost()));
                 limitcost.setText(Integer.toString(group.getLimitcost()));

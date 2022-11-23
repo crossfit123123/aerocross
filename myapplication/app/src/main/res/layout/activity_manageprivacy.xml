@@ -36,6 +36,16 @@
             android:text="여" />
     </LinearLayout>
 
+    <Spinner
+        android:id="@+id/activespinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gw"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
+
+        />
+
     <EditText
         android:id="@+id/나이입력칸"
         android:layout_width="match_parent"
@@ -67,16 +77,6 @@
         android:imeOptions="actionDone"
         android:inputType="number"
         android:digits="0123456789"/>
-
-    <EditText
-        android:id="@+id/활동지수입력칸"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:fontFamily="@font/gw"
-        android:hint="활동지수입력"
-        android:imeOptions="actionDone"
-        android:inputType="number" />
 
     <EditText
         android:id="@+id/지출량한도입력칸"

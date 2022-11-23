@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class sudong extends AppCompatActivity {
+public class DirectInputNutri extends AppCompatActivity {
 
     EditText writecal;
     EditText writecalbo;
@@ -25,7 +25,7 @@ public class sudong extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sudong);
+        setContentView(R.layout.activity_directinputnutri);
         Button button = findViewById(R.id.add_btn); //xml에서 생성한 id 매치
         writecal = findViewById(R.id.칼로리입력칸);
         writecalbo = findViewById(R.id.탄수화물입력칸);
@@ -42,7 +42,7 @@ public class sudong extends AppCompatActivity {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user group = snapshot.getValue(user.class);
+                        Data_total group = snapshot.getValue(Data_total.class);
 
                         int cal = group.getEatcalorie();
                         int cal_temp = Integer.parseInt(writecal.getText().toString());
@@ -74,7 +74,7 @@ public class sudong extends AppCompatActivity {
                     }
                 });
 
-                Intent intent = new Intent(sudong.this, mainactivity2.class);
+                Intent intent = new Intent(DirectInputNutri.this, ManageNutrient.class);
                 //입력한 input값을 intent로 전달한다.
                 //액티비티 이동
                 startActivity(intent);
