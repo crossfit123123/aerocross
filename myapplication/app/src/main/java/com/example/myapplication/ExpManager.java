@@ -61,10 +61,14 @@ public class ExpManager extends AppCompatActivity  {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(isChecked) {
-                    create = null;
+//                    create = null;
+                    create.setEnabled(true);
+
                 }
                 else {
 //                    remove = ;
+                    remove.setEnabled(false);
+
                 }
             }
                                               });

@@ -73,9 +73,11 @@ public class ManageNutrient extends AppCompatActivity {
                 Data_total group = snapshot.getValue(Data_total.class);
                 int rccal;
                 if (group.getSex().equals("남"))
-                    rccal = (int) ((88.362 + (13.397 * group.getWeight()) + (4.799 * group.getHeight()) - (5.677 * group.getAge()))*group.getActivitylevel());
+                    rccal = (int) ((88.362 + (13.397 * group.getWeight()) + (4.799 * group.getHeight()) -
+                            (5.677 * group.getAge()))*group.getActivitylevel());
                 else if(group.getSex().equals("여"))
-                    rccal = (int) ((447.593 + (9.247 * group.getWeight()) + (3.098 * group.getHeight()) - (4.33 * group.getAge()))*group.getActivitylevel());
+                    rccal = (int) ((447.593 + (9.247 * group.getWeight()) + (3.098 * group.getHeight()) -
+                            (4.33 * group.getAge()))*group.getActivitylevel());
                 else
                     rccal=0;
                 reccal.setText(Integer.toString(rccal));
