@@ -95,10 +95,13 @@ public class Data_total {
 
     private int totalcost;
     private int limitcost;
+    private int warningcost;
     public int getTotalcost() { return totalcost;}
     public void setTotalcost(int totalcost) {this.totalcost=totalcost;}
     public int getLimitcost() { return  limitcost;}
     public void setLimitcost(int limitcost) {this.limitcost=limitcost;}
+    public int getWarningcost() { return  warningcost;}
+    public void setWarningcost(int warningcost) {this.warningcost=warningcost;}
 
 
 

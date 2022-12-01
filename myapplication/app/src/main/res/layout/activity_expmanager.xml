@@ -7,6 +7,43 @@
     android:background="@drawable/bg"
     tools:context=".ExpManager">
 
+    <Button
+        android:id="@+id/create2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="4dp"
+        android:text="create"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/aaaa2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gw"
+        android:text="Waringcost"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aa2" />
+
+    <TextView
+        android:id="@+id/aaaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="198dp"
+        android:fontFamily="@font/gw"
+        android:text="   경고 금액    : "
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aaa" />
+
     <TextView
         android:id="@+id/aa2"
         android:layout_width="wrap_content"
@@ -31,26 +68,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/create"
+        android:id="@+id/create1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="251dp"
         android:layout_marginBottom="6dp"
         android:text="create"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/remove" />
-
-    <Button
-        android:id="@+id/remove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="251dp"
-        android:layout_marginTop="707dp"
-        android:text="remove"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/create"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/aa"
