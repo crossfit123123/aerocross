@@ -29,7 +29,7 @@ public class Startactivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Data_total group = snapshot.getValue(Data_total.class);
                 if (group.getSex()==null || group.getAge() == 0 || group.getHeight() == 0 || group.getWeight()==0
-                        )
+                )
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
