@@ -162,7 +162,7 @@ public class Camera extends AppCompatActivity {
 //                            Thread mythread = new Thread(new Runnable() {
 //                                @Override
 //                                public void run() {
-                                    correctionData(recognizedText);  //주석 해제하면 nutri 관련 메소드 구동
+                            correctionData(recognizedText);  //주석 해제하면 nutri 관련 메소드 구동
 //
 //                                }
 //                            });

@@ -8,11 +8,7 @@ public class Data_product {
     private int Productcalbo;
     private int Productprotein;
     private int Productfat;
-    private String Productname;
     public Data_product(){}
-
-    public String getProductname(){ return Productname; }
-    public void setProductname(String Productname){this.Productname=Productname;}
 
     public Integer getProductcalorie(){
         return Productcalorie;
