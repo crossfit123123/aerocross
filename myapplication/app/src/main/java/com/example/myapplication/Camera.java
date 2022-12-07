@@ -25,8 +25,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -48,6 +50,9 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 
 public class Camera extends AppCompatActivity {
@@ -62,7 +67,6 @@ public class Camera extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 100;
     private static final int STORAGE_REQUEST_CODE = 101;
 
-
     private String[] cameraPermissions;
     private String[] storagePermissions;
 
@@ -72,12 +76,29 @@ public class Camera extends AppCompatActivity {
 
     private Button insertImageBtn;
 
+    //    private int[] calorie;
+    ArrayList<Integer> calorie = new ArrayList<Integer>();
+    //    private int[] calbo;
+//
+//    private int[] protein;
+//    private int[] fat;
+    int i;
+    int k = 0;
+    String str;
+    String[] str2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         setContentView(R.layout.activity_camera);
+
+
+        final ListView listView = findViewById(R.id.listView);
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                new String[]{"copy","past","cut","delete","convert","open", "copy","past","cut","delete","convert","open", "copy","past","cut","delete","convert","open"}));
 
 
         //init UI views
@@ -135,22 +156,26 @@ public class Camera extends AppCompatActivity {
                         public void onSuccess(Text text) {
                             progressDialog.dismiss();
                             String recognizedText = text.getText();
-//                            result = recognizedText;
-//                            System.out.println("*********************\n");
-//                            System.out.println("*********************\n");
-//                            System.out.println("**************1*******\n");
-//                            System.out.println("*************2********\n");
-//                            System.out.println("*************3********\n");
-//                            System.out.println(result);
-//                            System.out.println("**************4*******\n");
-//                            System.out.println("***************5******\n");
-//                            System.out.println("****************6*****\n");
                             Log.d(TAG, "onSuccess: recognizedText:" + recognizedText);
                             recognizedTextEt.setText(recognizedText);
-//                            extest(recognizedText);
 //                            sortExpData(recognizedText);
-                            correctionData(recognizedText);
-
+//                            Thread mythread = new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+                                    correctionData(recognizedText);  //주석 해제하면 nutri 관련 메소드 구동
+//
+//                                }
+//                            });
+//                            mythread.start();
+//                            try {
+//                                mythread.join();
+//
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                            System.out.println("메인쓰레드 출력1");
+//                            System.out.println("메인쓰레드 출력2");
+//                            System.out.println("메인쓰레드 출력3");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -221,6 +246,7 @@ public class Camera extends AppCompatActivity {
                         imageUri = data.getData();
                         Log.d(TAG, "onActivityResult : imageUri" + imageUri);
                         imageIv.setImageURI(imageUri);
+//                        recognizeTextFromImage();
                     } else {
                         Log.d(TAG, "onActivityResult :");
                         Toast.makeText(Camera.this, "Canceled..", Toast.LENGTH_SHORT).show();
@@ -250,6 +276,7 @@ public class Camera extends AppCompatActivity {
 
                         Log.d(TAG, "onActivityResult :imageUri" + imageUri);
                         imageIv.setImageURI(imageUri);
+//                        recognizeTextFromImage();
 
                     } else {
                         Log.d(TAG, "onActivityResult:");
@@ -320,33 +347,6 @@ public class Camera extends AppCompatActivity {
     }
 
 
-    public void extest(String transfer) {
-        System.out.println("*********************\n");
-                            System.out.println("*********************\n");
-                            System.out.println("**************1*******\n");
-                            System.out.println("*************2********\n");
-                            System.out.println("*************3********\n");
-                            System.out.println(transfer);
-                            System.out.println("**************4*******\n");
-                            System.out.println("***************5******\n");
-                            System.out.println("****************6*****\n");
-        String[] change_target = transfer.split("\\n");
-        System.out.println("**배열의 첫번쩨***\n");
-
-        System.out.println(change_target[0]);
-        System.out.println("**배열의 두번쩨***\n");
-        System.out.println(change_target[1]);
-
-        System.out.println("원래의값");
-        System.out.println(isInteger(change_target[0]));
-
-        change_target[0]="12345";
-        System.out.println("12345로 세팅");
-        System.out.println(isInteger(change_target[0]));
-
-
-
-    }
 
     public static boolean isInteger(String input) {
         try {
@@ -359,10 +359,10 @@ public class Camera extends AppCompatActivity {
     }
     private String[] sortProductData(String transfer) {
 //          인식된 전체 문자열 데이터를 줄 단위로 나누어 배열공간으로 넣는 과정}
-    String[] spliited = transfer.split("\\n");
-    return spliited;
+        String[] spliited = transfer.split("\\n");
+        return spliited;
     }
-//
+    //
     private void sortExpData(String transfer) {
 //          인식된 전체 문자열 데이터 중 숫자 데이터를 찾아 배열공간으로 넣는 과정}
         String tmp=transfer.replaceAll(",","");
@@ -379,86 +379,115 @@ public class Camera extends AppCompatActivity {
         for(int i=0; i<sorted.length; i++)
         {
             if(sorted[i]>max)
-              max=sorted[i];
-}
-        for(int i=0; i<spliited.length; i++)
-        {
-            System.out.println("******");
-              System.out.println(spliited[i]);
+                max=sorted[i];
         }
+//        for(int i=0; i<spliited.length; i++)
+//        {
+//            System.out.println("******");
+//            System.out.println(spliited[i]);
+//        }
+//
+//        for(int i=0; i<spliited.length; i++)
+//        {
+//            System.out.println("******");
+//            System.out.println(sorted[i]);
+//        }
 
-        for(int i=0; i<spliited.length; i++)
-        {
-            System.out.println("******");
-            System.out.println(sorted[i]);
-        }
-        System.out.println("******");
-        System.out.println("******");
-        System.out.println("******");
-        System.out.println("******");
         System.out.println(max);
 
         sendExpData(max);
 
     }
-//    private int findBestValue(int sortedText[]){
-//               가장 큰 숫자를 반환하는 method 작성
-//               ...
-//               return ctotalcost; }
 
+
+
+//    public interface Callback{
+//        void success(int data);
+//        void fail(String errorMessage);
+//    }
 
     private void correctionData(String transfer) {
+
         String[] splitted = sortProductData(transfer);
         int cnum[];
-        String str = "";
+//        int[] calorie= new int[5];
+//        ArrayList<Integer> calorie = new ArrayList<Integer>();
+
+        for(int i=0;i<splitted.length;i++) {
+            if (isInteger(splitted[i])) break;
+            else if (splitted[i].equals("trash")) break;
+            else
+            {
+                k++;
+            }
+        }
+
+        str2 = new String[k];
+
+        for(int i=0;i<splitted.length;i++) {
+            if (isInteger(splitted[i])) break;
+            else if (splitted[i].equals("trash")) break;
+            else
+            {
+                str2[i] = splitted[i];
+            }
+        }
+
+        for(i=0; i<str2.length; i++){
+            System.out.println("*******");
+            System.out.println(str2[i]);
+            System.out.println("*******");
+        }
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("product");
-        for (int i = 0; i < splitted.length; i++) {
+        for (i = 0; i < splitted.length; i++) {
 
             str = splitted[i];
-            Query myTopPostsQuery = myRef.orderByChild("Name").equalTo(str);
 
+
+            Query myTopPostsQuery = myRef.orderByChild("Name").equalTo(str);
             myTopPostsQuery.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         Data_product group = dataSnapshot.getValue(Data_product.class);
                         System.out.println("*********************");
-                    System.out.println(group.getProductcalorie());
+                        System.out.println(group.getProductcalorie());
                         System.out.println(group.getProductcalbo());
                         System.out.println(group.getProductprotein());
                         System.out.println(group.getProductfat());
+                        int alpha = group.getProductcalorie();
+//                        calorie[i]=alpha;
+//                        calorie.add(alpha);
+//                        callback.success(1);
+//                        System.out.println("caloire:  "+calorie.get(i));
+//                        System.out.println("caloire:  "+i+calorie[i]);
 
-                    System.out.println("*********************");}
                     }
-//                    Data_product group= snapshot.getValue(Data_product.class);
-//                    if(group.getProductcalorie()!=0)
-//                    {System.out.println("*********************");
-//                    System.out.println(group.getProductcalorie());
-//                    System.out.println("*********************");}
-//                    else
-//                        System.out.println("*************fail********");
-//
+                }
+
 
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+//                    callback.fail(error.getMessage());
 
                 }
             });
 
         }
+
+
+        System.out.println("실험출력");
+//            System.out.println("caloire:  "+calorie.get(0));   //주석처리 해제하면 동작X
+        System.out.println("실험출력");
+
+
+
     }
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference();
-//        myRef.child("prouct").child(str).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Data_product group = snapshot.getValue(Data_product.class);
-//                for (int i = 0; i < splitted.length; i++) {
-//                    if (NonNull(group.getProductCalorie(splitted[i])))
-//                    //
+//
 //
 ////              ccalbo[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
 ////              cprotein[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
@@ -495,41 +524,44 @@ public class Camera extends AppCompatActivity {
 //        }
 
 //    }
-//      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
+
+
+    //      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
 //        //데이터베이스(Nutri) 로 보냄
+
+    //     myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
+//        @Override
+//        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
 //        }
-      private void sendExpData(int ctotalcost) {
-          //expdata를 Exp 데이터베이스로 전달
-          FirebaseDatabase database = FirebaseDatabase.getInstance();
-          DatabaseReference myRef = database.getReference();
+//
+//        @Override
+//        public void onCancelled(@NonNull DatabaseError error) {
+//
+//        }
+//    });
+//        }
+    private void sendExpData(int ctotalcost) {
+        //expdata를 Exp 데이터베이스로 전달
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
 
-          myRef.child("user").child("expenditure").addListenerForSingleValueEvent(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot snapshot) {
-                  Data_total group = snapshot.getValue(Data_total.class);
-                  int tmp = group.getTotalcost();
-                  int sum = tmp + ctotalcost;
-                  myRef.child("user").child("expenditure").child("totalcost").setValue(sum);
+        myRef.child("user").child("expenditure").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Data_total group = snapshot.getValue(Data_total.class);
+                int tmp = group.getTotalcost();
+                int sum = tmp + ctotalcost;
+                myRef.child("user").child("expenditure").child("totalcost").setValue(sum);
 
-              }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-              @Override
-              public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
-              }
-          });
-          myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-              }
-
-              @Override
-              public void onCancelled(@NonNull DatabaseError error) {
-
-              }
-          });
-      }
+    }
 
 
 }

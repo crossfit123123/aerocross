@@ -42,7 +42,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="411dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,18 +57,11 @@
                 android:src="@drawable/bbb"
                 app:strokeWidth="2dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:fontFamily="@font/gw"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
-                style="@style/TextAppearance.MaterialComponents.Headline6"/>
             <EditText
+                android:id="@+id/recognizedTextEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recognizedTextEt"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/insertbutton"
@@ -79,10 +73,12 @@
         </LinearLayout>
 
 
-
     </ScrollView>
 
-
-
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+    </ListView>
 
 </LinearLayout>
