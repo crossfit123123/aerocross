@@ -76,12 +76,15 @@ public class Camera extends AppCompatActivity {
 
     private Button insertImageBtn;
 
-    //    private int[] calorie;
-    ArrayList<Integer> calorie = new ArrayList<Integer>();
+    private String[] productname={"미쯔","초코파이","크라운산도","코카콜라","스프라이트"};
+    private int[] productcalorie={1000,2000,3000,4000,5000};
+    private int[] productcalbo={100,200,300,400,500};
+    private int[] productprotein={30,40,50,60,70};
+    private int[] productfat={15,16,17,18,19};
+
+//    ArrayList<Integer> calorie = new ArrayList<Integer>();
     //    private int[] calbo;
-//
-//    private int[] protein;
-//    private int[] fat;
+
     int i;
     int k = 0;
     String str;
@@ -92,22 +95,14 @@ public class Camera extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_camera);
-
-
-        final ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                new String[]{"copy","past","cut","delete","convert","open", "copy","past","cut","delete","convert","open", "copy","past","cut","delete","convert","open"}));
-
-
         //init UI views
 
         inputImageBtn = findViewById(R.id.inputImagerBtn);
         recognizeTextBtn = findViewById(R.id.recognizeTextBtn);
         imageIv = findViewById(R.id.imageIv);
         recognizedTextEt = findViewById(R.id.recognizedTextEt);
-        insertImageBtn=findViewById(R.id.insertbutton);
+        insertImageBtn = findViewById(R.id.insertbutton);
         //init arrays of permissions required for camera, gallery
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -140,8 +135,25 @@ public class Camera extends AppCompatActivity {
 
             }
         });
-    }
 
+        ListView listview;
+        ListViewAdapter adapter;
+
+        // Adapter 생성
+        adapter = new ListViewAdapter();
+
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.listView);
+        listview.setAdapter(adapter);
+
+//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
+//                "Box", "Account Box Black 36dp");
+//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
+//                "Box", "Account Box Black 36dp");
+//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
+//                "Box", "Account Box Black 36dp");
+
+    }
     private void recognizeTextFromImage() {
         Log.d(TAG, "recognizeTextFromImage");
         progressDialog.setMessage("Preparing image..");
@@ -159,23 +171,9 @@ public class Camera extends AppCompatActivity {
                             Log.d(TAG, "onSuccess: recognizedText:" + recognizedText);
                             recognizedTextEt.setText(recognizedText);
 //                            sortExpData(recognizedText);
-//                            Thread mythread = new Thread(new Runnable() {
-//                                @Override
-//                                public void run() {
+//
                             correctionData(recognizedText);  //주석 해제하면 nutri 관련 메소드 구동
-//
-//                                }
-//                            });
-//                            mythread.start();
-//                            try {
-//                                mythread.join();
-//
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                            System.out.println("메인쓰레드 출력1");
-//                            System.out.println("메인쓰레드 출력2");
-//                            System.out.println("메인쓰레드 출력3");
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -347,146 +345,110 @@ public class Camera extends AppCompatActivity {
     }
 
 
-
     public static boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
             return true;
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
+
     private String[] sortProductData(String transfer) {
 //          인식된 전체 문자열 데이터를 줄 단위로 나누어 배열공간으로 넣는 과정}
         String[] spliited = transfer.split("\\n");
         return spliited;
     }
+
     //
     private void sortExpData(String transfer) {
 //          인식된 전체 문자열 데이터 중 숫자 데이터를 찾아 배열공간으로 넣는 과정}
-        String tmp=transfer.replaceAll(",","");
+        String tmp = transfer.replaceAll(",", "");
         String[] spliited = tmp.split("\\n");
-        int max=0;
+        int max = 0;
         int[] sorted = new int[spliited.length];
 
-        for(int i=0;i<spliited.length;i++)
-        {
-            if(isInteger(spliited[i]))
-                sorted[i]=Integer.parseInt(spliited[i]);
+        for (int i = 0; i < spliited.length; i++) {
+            if (isInteger(spliited[i]))
+                sorted[i] = Integer.parseInt(spliited[i]);
         }
 
-        for(int i=0; i<sorted.length; i++)
-        {
-            if(sorted[i]>max)
-                max=sorted[i];
+        for (int i = 0; i < sorted.length; i++) {
+            if (sorted[i] > max)
+                max = sorted[i];
         }
-//        for(int i=0; i<spliited.length; i++)
-//        {
-//            System.out.println("******");
-//            System.out.println(spliited[i]);
-//        }
-//
-//        for(int i=0; i<spliited.length; i++)
-//        {
-//            System.out.println("******");
-//            System.out.println(sorted[i]);
-//        }
-
         System.out.println(max);
-
         sendExpData(max);
 
     }
 
-
-
-//    public interface Callback{
-//        void success(int data);
-//        void fail(String errorMessage);
-//    }
-
     private void correctionData(String transfer) {
 
         String[] splitted = sortProductData(transfer);
-        int cnum[];
-//        int[] calorie= new int[5];
-//        ArrayList<Integer> calorie = new ArrayList<Integer>();
+        ListView listview;
+        ListViewAdapter adapter;
 
-        for(int i=0;i<splitted.length;i++) {
-            if (isInteger(splitted[i])) break;
-            else if (splitted[i].equals("trash")) break;
-            else
-            {
-                k++;
-            }
+        // Adapter 생성
+        adapter = new ListViewAdapter();
+
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.listView);
+        listview.setAdapter(adapter);
+
+        for(int i=0; i< splitted.length;i++)
+        {
+            for(int j=0;j< productname.length;j++)
+            {if(splitted[i].equals(productname[j]))
+            {System.out.println("***********");
+                    System.out.println(splitted[i]);
+                    System.out.println("***********");
+
+                adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
+                        productname[j]) ;
+
+
+//                adapter.notifyDataSetChanged();
+            }}
         }
+        adapter.notifyDataSetChanged();
+        String[] test = new String[splitted.length];
+        ArrayList<String> test2 = new ArrayList<String>();
 
-        str2 = new String[k];
-
-        for(int i=0;i<splitted.length;i++) {
-            if (isInteger(splitted[i])) break;
-            else if (splitted[i].equals("trash")) break;
-            else
-            {
-                str2[i] = splitted[i];
-            }
-        }
-
-        for(i=0; i<str2.length; i++){
-            System.out.println("*******");
-            System.out.println(str2[i]);
-            System.out.println("*******");
-        }
-
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("product");
-        for (i = 0; i < splitted.length; i++) {
-
-            str = splitted[i];
-
-
-            Query myTopPostsQuery = myRef.orderByChild("Name").equalTo(str);
-            myTopPostsQuery.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Data_product group = dataSnapshot.getValue(Data_product.class);
-                        System.out.println("*********************");
-                        System.out.println(group.getProductcalorie());
-                        System.out.println(group.getProductcalbo());
-                        System.out.println(group.getProductprotein());
-                        System.out.println(group.getProductfat());
-                        int alpha = group.getProductcalorie();
-//                        calorie[i]=alpha;
-//                        calorie.add(alpha);
-//                        callback.success(1);
-//                        System.out.println("caloire:  "+calorie.get(i));
-//                        System.out.println("caloire:  "+i+calorie[i]);
-
-                    }
-                }
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("product");
+//        for (i = 0; i < splitted.length; i++) {
+//            str = splitted[i];
+//            Query myTopPostsQuery = myRef.orderByChild("Name").equalTo(str);
+//            myTopPostsQuery.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        Data_product group = dataSnapshot.getValue(Data_product.class);
+////                        System.out.println("*********************");
+////                        System.out.println(group.getProductcalorie());
+////                        System.out.println(group.getProductcalbo());
+////                        System.out.println(group.getProductprotein());
+////                        System.out.println(group.getProductfat());
+//                    }
+//                }
+//
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+////                    callback.fail(error.getMessage());
+//
+//                }
+//            });
 
 
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-//                    callback.fail(error.getMessage());
 
-                }
-            });
-
-        }
-
-
-        System.out.println("실험출력");
+            System.out.println("실험출력");
 //            System.out.println("caloire:  "+calorie.get(0));   //주석처리 해제하면 동작X
-        System.out.println("실험출력");
+            System.out.println("실험출력");
 
 
-
-    }
+        }
 //
 //
 ////              ccalbo[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
@@ -523,13 +485,13 @@ public class Camera extends AppCompatActivity {
 //            }
 //        }
 
-//    }
 
 
-    //      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
+
+        //      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
 //        //데이터베이스(Nutri) 로 보냄
 
-    //     myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
+        //     myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
 //        @Override
 //        public void onDataChange(@NonNull DataSnapshot snapshot) {
 //
@@ -541,27 +503,28 @@ public class Camera extends AppCompatActivity {
 //        }
 //    });
 //        }
-    private void sendExpData(int ctotalcost) {
-        //expdata를 Exp 데이터베이스로 전달
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        private void sendExpData ( int ctotalcost){
+            //expdata를 Exp 데이터베이스로 전달
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
 
-        myRef.child("user").child("expenditure").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Data_total group = snapshot.getValue(Data_total.class);
-                int tmp = group.getTotalcost();
-                int sum = tmp + ctotalcost;
-                myRef.child("user").child("expenditure").child("totalcost").setValue(sum);
+            myRef.child("user").child("expenditure").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Data_total group = snapshot.getValue(Data_total.class);
+                    int tmp = group.getTotalcost();
+                    int sum = tmp + ctotalcost;
+                    myRef.child("user").child("expenditure").child("totalcost").setValue(sum);
 
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+
 
     }
-
-
-}
