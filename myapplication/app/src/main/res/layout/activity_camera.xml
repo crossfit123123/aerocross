@@ -42,7 +42,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="411dp">
+        android:layout_height="321dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,18 +57,6 @@
                 android:src="@drawable/bbb"
                 app:strokeWidth="2dp" />
 
-            <EditText
-                android:id="@+id/recognizedTextEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/uploadbutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-
 
         </LinearLayout>
 
@@ -78,7 +66,6 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
-        android:layout_height="250dp">
-    </ListView>
+        android:layout_height="346dp"></ListView>
 
 </LinearLayout>

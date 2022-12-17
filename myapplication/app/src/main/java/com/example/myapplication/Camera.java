@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -51,7 +52,7 @@ public class Camera extends AppCompatActivity {
     private MaterialButton inputImageBtn;
     private MaterialButton recognizeTextBtn;
     private ShapeableImageView imageIv;
-    private EditText recognizedTextEt;
+
     //TAG
     private static final String TAG = "MAIN_TAG";
     private Uri imageUri = null;
@@ -63,9 +64,8 @@ public class Camera extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private TextRecognizer textRecognizer;
-    static String result;
 
-    private Button insertImageBtn;
+
 
     private String[] productname = {"미쯔", "초코파이", "크라운산도", "코카콜라", "스프라이트"};
     private int[] productcalorie = {1000, 2000, 3000, 4000, 5000};
@@ -73,20 +73,6 @@ public class Camera extends AppCompatActivity {
     private int[] productprotein = {30, 40, 50, 60, 70};
     private int[] productfat = {15, 16, 17, 18, 19};
 
-
-    private int totalcalorie = 0;
-    private int totalcalbo = 0;
-    private int totalprotein = 0;
-    private int totalfat = 0;
-
-
-//    ArrayList<Integer> calorie = new ArrayList<Integer>();
-    //    private int[] calbo;
-
-    int i;
-    int k = 0;
-    String str;
-    String[] str2;
 
 
     @Override
@@ -99,8 +85,6 @@ public class Camera extends AppCompatActivity {
         inputImageBtn = findViewById(R.id.inputImagerBtn);
         recognizeTextBtn = findViewById(R.id.recognizeTextBtn);
         imageIv = findViewById(R.id.imageIv);
-        recognizedTextEt = findViewById(R.id.recognizedTextEt);
-        insertImageBtn = findViewById(R.id.uploadbutton);
         //init arrays of permissions required for camera, gallery
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -127,57 +111,8 @@ public class Camera extends AppCompatActivity {
                 }
             }
         });
-        insertImageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        ListView listview;
-        ListViewAdapter adapter;
-
-        // Adapter 생성
-        adapter = new ListViewAdapter();
-
-        // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView) findViewById(R.id.listView);
-        listview.setAdapter(adapter);
-
-//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
-//                "Box", "Account Box Black 36dp");
-//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
-//                "Box", "Account Box Black 36dp");
-//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
-//                "Box", "Account Box Black 36dp");
-
-        Button uploadbtn = (Button) findViewById(R.id.uploadbutton);
-        uploadbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
-                myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Data_total group = snapshot.getValue(Data_total.class);
-//
-                        myRef.child("user").child("nutrition").child("eatcalorie").setValue(group.getEatcalorie()+totalcalorie);
-                        myRef.child("user").child("nutrition").child("eatcalbo").setValue(group.getEatcalbo()+totalcalbo);
-                        myRef.child("user").child("nutrition").child("eatprotein").setValue(group.getEatprotein()+totalprotein);
-                        myRef.child("user").child("nutrition").child("eatfat").setValue(group.getEatfat()+totalfat);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
 
-            }
-        });
     }
 
     private void recognizeTextFromImage() {
@@ -195,9 +130,7 @@ public class Camera extends AppCompatActivity {
                             progressDialog.dismiss();
                             String recognizedText = text.getText();
                             Log.d(TAG, "onSuccess: recognizedText:" + recognizedText);
-                            recognizedTextEt.setText(recognizedText);
-//                            sortExpData(recognizedText); //지출량메소드 구동
-//
+                            sortExpData(recognizedText); //지출량메소드 구동
                             correctionData(recognizedText);  //주석 해제하면 nutri 관련 메소드 구동
 
                         }
@@ -409,29 +342,18 @@ public class Camera extends AppCompatActivity {
     }
 
     private void correctionData(String transfer) {
-
         String[] splitted = sortProductData(transfer);
         ListView listview;
         ListViewAdapter adapter;
-
         // Adapter 생성
         adapter = new ListViewAdapter();
-
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listView);
         listview.setAdapter(adapter);
-
         ArrayList<Integer> buycalorie = new ArrayList<Integer>();
         ArrayList<Integer> buycalbo = new ArrayList<Integer>();
         ArrayList<Integer> buyprotein = new ArrayList<Integer>();
         ArrayList<Integer> buyfat = new ArrayList<Integer>();
-//        int[] buycalorie=new int[splitted.length];
-//        int[] buycalbo=new int[splitted.length];
-//        int[] buyprotein=new int[splitted.length];
-//        int[] buyfat=new int[splitted.length];
-
-
-
         for (int i = 0; i < splitted.length; i++) {
             for (int j = 0; j < productname.length; j++) {
                 if (splitted[i].equals(productname[j])) {
@@ -442,64 +364,54 @@ public class Camera extends AppCompatActivity {
                     buycalbo.add(productcalbo[j]);
                     buyprotein.add(productprotein[j]);
                     buyfat.add(productfat[j]);
-
                     adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
                             productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
-
-
-//                adapter.notifyDataSetChanged();
                 }
             }
         }
         adapter.notifyDataSetChanged();
-        String[] test = new String[splitted.length];
-        ArrayList<String> test2 = new ArrayList<String>();
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListViewItem itemex= (ListViewItem)listview.getItemAtPosition(position);
+                itemex.plusItemcount();
+                adapter.notifyDataSetChanged();
 
-//
-
-
-        System.out.println("실험출력");
-//            System.out.println("caloire:  "+calorie.get(0));   //주석처리 해제하면 동작X
-        System.out.println("실험출력");
-
-        calculateTotaldata(buycalorie,buycalbo,buyprotein,buyfat,listview);
-    }
-
-    private void calculateTotaldata(ArrayList<Integer> calorie , ArrayList<Integer> calbo, ArrayList<Integer> protein, ArrayList<Integer> fat, ListView lsv) {
-        ListView listview;
-        ListViewAdapter adapter;
+                int calorie= itemex.getcalorie();
+                int calbo= itemex.getcalbo();
+                int protein= itemex.getprotein();
+                int fat= itemex.getfat();
+                calculateTotaldata(calorie,calbo,protein,fat);
 
 
-
-        for (int i = 0; i < calorie.size(); i++) {
-            ListViewItem item= (ListViewItem) lsv.getItemAtPosition(0);
-
-            totalcalorie += calorie.get(i);
-            totalcalbo += calbo.get(i);
-            totalprotein += protein.get(i);
-            totalfat += fat.get(i);
-        }
+            }
+        });
     }
 
 
+    private void calculateTotaldata(int totalcalorie,int totalcalbo,int totalprotein, int totalfat){
 
-
-
-    //      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
-//        //데이터베이스(Nutri) 로 보냄
-
-        //     myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
-//        @Override
-//        public void onDataChange(@NonNull DataSnapshot snapshot) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+        myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Data_total group = snapshot.getValue(Data_total.class);
 //
-//        }
-//
-//        @Override
-//        public void onCancelled(@NonNull DatabaseError error) {
-//
-//        }
-//    });
-//        }
+                myRef.child("user").child("nutrition").child("eatcalorie").setValue(group.getEatcalorie()+totalcalorie);
+                myRef.child("user").child("nutrition").child("eatcalbo").setValue(group.getEatcalbo()+totalcalbo);
+                myRef.child("user").child("nutrition").child("eatprotein").setValue(group.getEatprotein()+totalprotein);
+                myRef.child("user").child("nutrition").child("eatfat").setValue(group.getEatfat()+totalfat);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
         private void sendExpData ( int ctotalcost){
             //expdata를 Exp 데이터베이스로 전달
             FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -9,7 +9,6 @@ public class Data_total {
     private int Eatfat;
     private int Eatprotein;
 
-
     public Data_total(){}
 
     public Integer getEatcalorie(){

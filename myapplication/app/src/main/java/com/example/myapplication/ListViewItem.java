@@ -11,6 +11,15 @@ public class ListViewItem {
     private int proudctprotein1;
     private int proudctfat1;
 
+    private int buycount;
+
+    public Integer getBuycount(){
+        return buycount;
+    }
+    public void setBuycount(int buycount){
+        this.buycount = buycount;
+    }
+    public void plusItemcount(){buycount++;}
 
     public void setIcon(Drawable icon) {
         iconDrawable = icon ;

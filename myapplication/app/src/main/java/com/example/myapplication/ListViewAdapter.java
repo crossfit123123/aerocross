@@ -49,6 +49,8 @@ public class ListViewAdapter extends BaseAdapter {
         TextView proteinTextView = (TextView) convertView.findViewById(R.id.tvprotein) ;
         TextView fatTextView = (TextView) convertView.findViewById(R.id.tvfat) ;
 
+        TextView countView=(TextView) convertView.findViewById(R.id.tvcount);
+
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
 
@@ -61,6 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
         proteinTextView.setText(Integer.toString(listViewItem.getprotein()));
         fatTextView.setText(Integer.toString(listViewItem.getfat()));
 
+        countView.setText(Integer.toString(listViewItem.getBuycount()));
 
 
         return convertView;
@@ -106,6 +109,7 @@ public class ListViewAdapter extends BaseAdapter {
         item.setProudctcalbo(calbo);
         item.setProudctprotein(protein);
         item.setProudctfat(fat);
+        item.setBuycount(0);
 
         listViewItemList.add(item);
     }
