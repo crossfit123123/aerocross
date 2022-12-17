@@ -64,7 +64,7 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/insertbutton"
+                android:id="@+id/uploadbutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />

@@ -11,21 +11,16 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.media.MediaDataSource;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -41,18 +36,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 
 public class Camera extends AppCompatActivity {
@@ -76,11 +67,18 @@ public class Camera extends AppCompatActivity {
 
     private Button insertImageBtn;
 
-    private String[] productname={"미쯔","초코파이","크라운산도","코카콜라","스프라이트"};
-    private int[] productcalorie={1000,2000,3000,4000,5000};
-    private int[] productcalbo={100,200,300,400,500};
-    private int[] productprotein={30,40,50,60,70};
-    private int[] productfat={15,16,17,18,19};
+    private String[] productname = {"미쯔", "초코파이", "크라운산도", "코카콜라", "스프라이트"};
+    private int[] productcalorie = {1000, 2000, 3000, 4000, 5000};
+    private int[] productcalbo = {100, 200, 300, 400, 500};
+    private int[] productprotein = {30, 40, 50, 60, 70};
+    private int[] productfat = {15, 16, 17, 18, 19};
+
+
+    private int totalcalorie = 0;
+    private int totalcalbo = 0;
+    private int totalprotein = 0;
+    private int totalfat = 0;
+
 
 //    ArrayList<Integer> calorie = new ArrayList<Integer>();
     //    private int[] calbo;
@@ -102,7 +100,7 @@ public class Camera extends AppCompatActivity {
         recognizeTextBtn = findViewById(R.id.recognizeTextBtn);
         imageIv = findViewById(R.id.imageIv);
         recognizedTextEt = findViewById(R.id.recognizedTextEt);
-        insertImageBtn = findViewById(R.id.insertbutton);
+        insertImageBtn = findViewById(R.id.uploadbutton);
         //init arrays of permissions required for camera, gallery
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -153,7 +151,35 @@ public class Camera extends AppCompatActivity {
 //        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
 //                "Box", "Account Box Black 36dp");
 
+        Button uploadbtn = (Button) findViewById(R.id.uploadbutton);
+        uploadbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+                myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Data_total group = snapshot.getValue(Data_total.class);
+//
+                        myRef.child("user").child("nutrition").child("eatcalorie").setValue(group.getEatcalorie()+totalcalorie);
+                        myRef.child("user").child("nutrition").child("eatcalbo").setValue(group.getEatcalbo()+totalcalbo);
+                        myRef.child("user").child("nutrition").child("eatprotein").setValue(group.getEatprotein()+totalprotein);
+                        myRef.child("user").child("nutrition").child("eatfat").setValue(group.getEatfat()+totalfat);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+        });
     }
+
     private void recognizeTextFromImage() {
         Log.d(TAG, "recognizeTextFromImage");
         progressDialog.setMessage("Preparing image..");
@@ -170,7 +196,7 @@ public class Camera extends AppCompatActivity {
                             String recognizedText = text.getText();
                             Log.d(TAG, "onSuccess: recognizedText:" + recognizedText);
                             recognizedTextEt.setText(recognizedText);
-//                            sortExpData(recognizedText);
+//                            sortExpData(recognizedText); //지출량메소드 구동
 //
                             correctionData(recognizedText);  //주석 해제하면 nutri 관련 메소드 구동
 
@@ -395,100 +421,71 @@ public class Camera extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listView);
         listview.setAdapter(adapter);
 
-        for(int i=0; i< splitted.length;i++)
-        {
-            for(int j=0;j< productname.length;j++)
-            {if(splitted[i].equals(productname[j]))
-            {System.out.println("***********");
+        ArrayList<Integer> buycalorie = new ArrayList<Integer>();
+        ArrayList<Integer> buycalbo = new ArrayList<Integer>();
+        ArrayList<Integer> buyprotein = new ArrayList<Integer>();
+        ArrayList<Integer> buyfat = new ArrayList<Integer>();
+//        int[] buycalorie=new int[splitted.length];
+//        int[] buycalbo=new int[splitted.length];
+//        int[] buyprotein=new int[splitted.length];
+//        int[] buyfat=new int[splitted.length];
+
+
+
+        for (int i = 0; i < splitted.length; i++) {
+            for (int j = 0; j < productname.length; j++) {
+                if (splitted[i].equals(productname[j])) {
+                    System.out.println("***********");
                     System.out.println(splitted[i]);
                     System.out.println("***********");
+                    buycalorie.add(productcalorie[j]);
+                    buycalbo.add(productcalbo[j]);
+                    buyprotein.add(productprotein[j]);
+                    buyfat.add(productfat[j]);
 
-                adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
-                        productname[j]) ;
+                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
+                            productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
 
 
 //                adapter.notifyDataSetChanged();
-            }}
+                }
+            }
         }
         adapter.notifyDataSetChanged();
         String[] test = new String[splitted.length];
         ArrayList<String> test2 = new ArrayList<String>();
 
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("product");
-//        for (i = 0; i < splitted.length; i++) {
-//            str = splitted[i];
-//            Query myTopPostsQuery = myRef.orderByChild("Name").equalTo(str);
-//            myTopPostsQuery.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        Data_product group = dataSnapshot.getValue(Data_product.class);
-////                        System.out.println("*********************");
-////                        System.out.println(group.getProductcalorie());
-////                        System.out.println(group.getProductcalbo());
-////                        System.out.println(group.getProductprotein());
-////                        System.out.println(group.getProductfat());
-//                    }
-//                }
 //
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-////                    callback.fail(error.getMessage());
-//
-//                }
-//            });
 
 
-
-
-            System.out.println("실험출력");
+        System.out.println("실험출력");
 //            System.out.println("caloire:  "+calorie.get(0));   //주석처리 해제하면 동작X
-            System.out.println("실험출력");
+        System.out.println("실험출력");
+
+        calculateTotaldata(buycalorie,buycalbo,buyprotein,buyfat,listview);
+    }
+
+    private void calculateTotaldata(ArrayList<Integer> calorie , ArrayList<Integer> calbo, ArrayList<Integer> protein, ArrayList<Integer> fat, ListView lsv) {
+        ListView listview;
+        ListViewAdapter adapter;
 
 
+
+        for (int i = 0; i < calorie.size(); i++) {
+            ListViewItem item= (ListViewItem) lsv.getItemAtPosition(0);
+
+            totalcalorie += calorie.get(i);
+            totalcalbo += calbo.get(i);
+            totalprotein += protein.get(i);
+            totalfat += fat.get(i);
         }
-//
-//
-////              ccalbo[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-////              cprotein[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-////              cfat[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-////              ccalo[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-//    }
-//        for(int i=0 ;i<=n;++){
-//        if (recognizedText[n] == DatabaseText){
-//              cnum[i]=사용자로부터 받아옴
-//                ccalo, ccalbo cprotein cfat는 데이터베이스(Product)로부터 받아옴
-//              ccalbo[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-//              cprotein[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-//              cfat[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-//              ccalo[i]=(Integer.toString(제품명.getcalorie()))*cnum[n]
-//          }
-//    }
-//        private int calcNutData(int ccalo[],int ccalbo[],int cprotein[],int cfat[]){
-//            int ctcalo, ctcalbo, ctprotein, ctfat = 0;
-//            for(int i=0;i<=n;++){
-//                ctcalo = ccalo[i]+ctcalo;
-//                ctcalbo = ccalbo[i]+ctcalbo;
-//                ctprotein = cprotein[i]+ctprotein;
-//                ctfat = cfat[i] + ctfat ;
-//            }
-//        }
+    }
 
 
 
 
-        //      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
+
+    //      private int sendNutriData(int ctcalo,int ctcalbo, int ctprotein, int ctfat){
 //        //데이터베이스(Nutri) 로 보냄
 
         //     myRef.child("user").child("nutrition").addListenerForSingleValueEvent(new ValueEventListener() {

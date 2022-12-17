@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
+
+
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
 
@@ -42,6 +44,10 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
 //        TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
+        TextView calorieTextView = (TextView) convertView.findViewById(R.id.tvcalorie) ;
+        TextView calboTextView = (TextView) convertView.findViewById(R.id.tvcalbo) ;
+        TextView proteinTextView = (TextView) convertView.findViewById(R.id.tvprotein) ;
+        TextView fatTextView = (TextView) convertView.findViewById(R.id.tvfat) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
@@ -50,6 +56,12 @@ public class ListViewAdapter extends BaseAdapter {
         iconImageView.setImageDrawable(listViewItem.getIcon());
         titleTextView.setText(listViewItem.getTitle());
 //        descTextView.setText(listViewItem.getDesc());
+        calorieTextView.setText(Integer.toString(listViewItem.getcalorie()));
+        calboTextView.setText(Integer.toString(listViewItem.getcalbo()));
+        proteinTextView.setText(Integer.toString(listViewItem.getprotein()));
+        fatTextView.setText(Integer.toString(listViewItem.getfat()));
+
+
 
         return convertView;
     }
@@ -67,6 +79,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
+
+    //아이템 추가 생성자(이미지,텍스트1,텍스트2)
     public void addItem(Drawable icon, String title, String desc) {
         ListViewItem item = new ListViewItem();
 
@@ -76,11 +90,22 @@ public class ListViewAdapter extends BaseAdapter {
 
         listViewItemList.add(item);
     }
+    //아이템 추가 생성자(이미지,텍스트)
     public void addItem(Drawable icon,String title) {
         ListViewItem item = new ListViewItem();
         item.setIcon(icon);
         item.setTitle(title);
+        listViewItemList.add(item);
+    }
 
+    public void addItem(Drawable icon,String title,int calorie, int calbo, int protein, int fat) {
+        ListViewItem item = new ListViewItem();
+        item.setIcon(icon);
+        item.setTitle(title);
+        item.setProudctcalorie(calorie);
+        item.setProudctcalbo(calbo);
+        item.setProudctprotein(protein);
+        item.setProudctfat(fat);
 
         listViewItemList.add(item);
     }
