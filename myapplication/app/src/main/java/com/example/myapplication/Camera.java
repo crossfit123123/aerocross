@@ -67,11 +67,11 @@ public class Camera extends AppCompatActivity {
 
 
 
-    private String[] productname = {"미쯔", "초코파이", "크라운산도", "코카콜라", "스프라이트"};
-    private int[] productcalorie = {1000, 2000, 3000, 4000, 5000};
-    private int[] productcalbo = {100, 200, 300, 400, 500};
-    private int[] productprotein = {30, 40, 50, 60, 70};
-    private int[] productfat = {15, 16, 17, 18, 19};
+    private String[] productname = {"동아)박카스F", "샌)이건가요샌드위치", "큐브티라미수N", "해성)미니사과300g", "빙그레)메로나"};
+    private int[] productcalorie = {1, 10, 100, 1000, 10000};
+    private int[] productcalbo = {1, 10, 100, 1000, 10000};
+    private int[] productprotein = {1, 10, 100, 1000, 10000};
+    private int[] productfat = {1, 10, 100, 1000, 10000};
 
 
 

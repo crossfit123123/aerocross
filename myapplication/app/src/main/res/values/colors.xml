@@ -10,5 +10,7 @@
     <color name="blue">#368AFF</color>
     <color name="pastelpurple">#CCCCFF</color>
     <color name="basecolor">#626c73</color>
+    <color name="backgroundcolor">#DBEBFA</color>
+
 
 </resources>

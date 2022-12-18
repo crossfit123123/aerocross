@@ -163,8 +163,8 @@ public class ManagePrivacy extends AppCompatActivity {
                 myRef.child("user").child("user_information").child("age").setValue(Integer.parseInt(writeage.getText().toString()));
                 myRef.child("user").child("user_information").child("height").setValue(Integer.parseInt(writeheight.getText().toString()));
                 myRef.child("user").child("user_information").child("weight").setValue(Integer.parseInt(writeweight.getText().toString()));
-
                 myRef.child("user").child("expenditure").child("limitcost").setValue(Integer.parseInt(writelimitcost.getText().toString()));
+                myRef.child("user").child("expenditure").child("warningcost").setValue(Integer.parseInt(writelimitcost.getText().toString())*0.8);
 
                 int val;
                 switch(spinner.getSelectedItem().toString()) {

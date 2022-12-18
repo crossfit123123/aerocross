@@ -12,37 +12,38 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gw"
         android:text="건 너 편"
         android:textColor="@color/basecolor"
-        android:fontFamily="@font/gw"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <Button
         android:id="@+id/mvbtn1"
-        android:layout_width="179dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="184dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="@color/pastelpurple"
         android:fontFamily="@font/gw"
         android:text="영양성분 관리"
         android:textColor="@color/basecolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scanbtn" />
 
     <Button
         android:id="@+id/mvbtn2"
-        android:layout_width="94dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/pastelpurple"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/backgroundcolor"
+        android:drawableTop="@drawable/settingiconxml"
         android:fontFamily="@font/gw"
         android:text="개인정보 관리"
         android:textColor="@color/basecolor"
@@ -51,27 +52,31 @@
 
     <Button
         android:id="@+id/mvbtn3"
-        android:layout_width="@android:dimen/thumbnail_height"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="160dp"
+        android:backgroundTint="@color/pastelpurple"
         android:fontFamily="@font/gw"
         android:text=" 지출량 관리"
         android:textColor="@color/basecolor"
-        android:backgroundTint="@color/pastelpurple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mvbtn1" />
+        app:layout_constraintTop_toBottomOf="@+id/mvbtn1"
+        app:layout_constraintVertical_bias="0.195" />
 
     <Button
         android:id="@+id/scanbtn"
-        android:layout_width="105dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="50dp"
-        android:text="SCAN"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="55dp"
+        android:backgroundTint="@color/backgroundcolor"
+        android:drawableTop="@drawable/scaniconxml"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
