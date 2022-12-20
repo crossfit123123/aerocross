@@ -22,12 +22,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <EditText
+        android:id="@+id/섭취탄수화물표시칸"
+        android:layout_width="35pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="16dp"
+        android:editable="false"
+        android:ems="10"
+        android:fontFamily="@font/gw"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/섭취칼로리표시칸" />
+
+    <EditText
+        android:id="@+id/권장지방표시칸"
+        android:layout_width="35pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/gw"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/섭취단백질표시칸" />
+
     <TextView
         android:id="@+id/칼로리"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="300dp"
         android:fontFamily="@font/gw"
         android:text="칼로리(kcal)"
         android:textColor="@color/basecolor"
@@ -36,128 +61,119 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/slash1"
+        android:id="@+id/오늘섭취량"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="188dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="236dp"
         android:fontFamily="@font/gw"
-        android:text="/"
+        android:text="오늘섭취량"
         android:textColor="@color/basecolor"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/slash2"
+        android:id="@+id/일일권장량"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="248dp"
-        android:fontFamily="@font/gw"
-        android:text="/"
-        android:textColor="@color/basecolor"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/slash3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="306dp"
-        android:fontFamily="@font/gw"
-        android:text="/"
-        android:textColor="@color/basecolor"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/slash4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="365dp"
-        android:fontFamily="@font/gw"
-        android:text="/"
-        android:textColor="@color/basecolor"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/탄수화물"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="33dp"
-        android:fontFamily="@font/gw"
-        android:text="탄수화물(g)"
-        android:textColor="@color/basecolor"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/칼로리" />
-
-    <EditText
-        android:id="@+id/섭취칼로리표시칸"
-
-        android:layout_width="35pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <EditText
-        android:id="@+id/권장칼로리표시칸"
-
-        android:layout_width="35pt"
         android:layout_height="wrap_content"
         android:layout_marginStart="272dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="date"
+        android:layout_marginTop="236dp"
+        android:fontFamily="@font/gw"
+        android:text="일일권장량"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <EditText
-        android:id="@+id/섭취탄수화물표시칸"
-        android:layout_width="35pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="15dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/섭취칼로리표시칸" />
-
-    <EditText
-        android:id="@+id/권장탄수화물표시칸"
-        android:layout_width="35pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="12dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/섭취칼로리표시칸" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/섭취단백질표시칸"
         android:layout_width="35pt"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
+        android:fontFamily="@font/gw"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/섭취탄수화물표시칸" />
+
+    <TextView
+        android:id="@+id/slash4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="464dp"
+        android:fontFamily="@font/gw"
+        android:text="/"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/권장지방표시칸"
+        app:layout_constraintStart_toEndOf="@+id/섭취지방표시칸"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/slash1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:fontFamily="@font/gw"
+        android:text="/"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/권장칼로리표시칸"
+        app:layout_constraintStart_toEndOf="@+id/섭취칼로리표시칸"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/지방"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/gw"
+        android:text="지방(g)"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/단백질" />
+
+    <TextView
+        android:id="@+id/slash3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="408dp"
+        android:fontFamily="@font/gw"
+        android:text="/"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/권장단백질표시칸"
+        app:layout_constraintStart_toEndOf="@+id/섭취단백질표시칸"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/섭취지방표시칸"
+        android:layout_width="35pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/gw"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/섭취단백질표시칸" />
+
+    <TextView
+        android:id="@+id/slash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/gw"
+        android:text="/"
+        android:textColor="@color/basecolor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/권장탄수화물표시칸"
+        app:layout_constraintStart_toEndOf="@+id/섭취탄수화물표시칸"
+        app:layout_constraintTop_toBottomOf="@+id/slash1" />
 
     <EditText
         android:id="@+id/권장단백질표시칸"
@@ -166,38 +182,30 @@
         android:layout_marginStart="272dp"
         android:layout_marginTop="12dp"
         android:ems="10"
+        android:fontFamily="@font/gw"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/섭취탄수화물표시칸" />
 
     <EditText
-        android:id="@+id/섭취지방표시칸"
-        android:layout_width="35pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/섭취단백질표시칸" />
+        android:id="@+id/권장칼로리표시칸"
 
-    <EditText
-        android:id="@+id/권장지방표시칸"
         android:layout_width="35pt"
         android:layout_height="wrap_content"
         android:layout_marginStart="272dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="290dp"
         android:ems="10"
+        android:fontFamily="@font/gw"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/섭취단백질표시칸" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/단백질"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/gw"
         android:text="단백질(g)"
         android:textColor="@color/basecolor"
@@ -205,18 +213,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/탄수화물" />
 
+    <EditText
+        android:id="@+id/섭취칼로리표시칸"
+
+        android:layout_width="35pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="290dp"
+        android:ems="10"
+        android:fontFamily="@font/gw"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/지방"
+        android:id="@+id/탄수화물"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/gw"
-        android:text="지방(g)"
+        android:text="탄수화물(g)"
         android:textColor="@color/basecolor"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/단백질" />
+        app:layout_constraintTop_toBottomOf="@+id/칼로리" />
+
+    <EditText
+        android:id="@+id/권장탄수화물표시칸"
+        android:layout_width="35pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="16dp"
+        android:editable="false"
+        android:ems="10"
+        android:fontFamily="@font/gw"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/섭취칼로리표시칸" />
 
     <TextView
         android:id="@+id/title"
@@ -242,7 +276,9 @@
         android:text="초기화"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/gw"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

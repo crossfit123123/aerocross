@@ -66,6 +66,6 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
-        android:layout_height="346dp"></ListView>
+        android:layout_height="307dp"></ListView>
 
 </LinearLayout>

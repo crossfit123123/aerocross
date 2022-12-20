@@ -364,8 +364,21 @@ public class Camera extends AppCompatActivity {
                     buycalbo.add(productcalbo[j]);
                     buyprotein.add(productprotein[j]);
                     buyfat.add(productfat[j]);
-                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bonobono),
+                    if(productname[j]=="동아)박카스F")
+                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.product1),
                             productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
+                    else if(productname[j]=="샌)이건가요샌드위치")
+                        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.product2),
+                                productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
+                    else if(productname[j]=="큐브티라미수N")
+                        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.product3),
+                                productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
+                    else if(productname[j]=="해성)미니사과300g")
+                        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.product4),
+                                productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
+                    else if(productname[j]=="빙그레)메로나")
+                        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.product5),
+                                productname[j], productcalorie[j], productcalbo[j], productprotein[j], productfat[j]);
                 }
             }
         }
@@ -423,7 +436,12 @@ public class Camera extends AppCompatActivity {
                     Data_total group = snapshot.getValue(Data_total.class);
                     int tmp = group.getTotalcost();
                     int sum = tmp + ctotalcost;
+
                     myRef.child("user").child("expenditure").child("totalcost").setValue(sum);
+                    /*
+                    myRef.child("user").child("expenditure").child("totalcost").setValue(sum);
+
+                     */
 
                 }
 

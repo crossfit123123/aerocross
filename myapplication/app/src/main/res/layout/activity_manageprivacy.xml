@@ -26,14 +26,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="남" />
+            android:text="남"
+            android:fontFamily="@font/gw"
+            />
 
         <CheckBox
             android:id="@+id/chbfemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="여" />
+            android:text="여"
+            android:fontFamily="@font/gw"
+            />
     </LinearLayout>
 
     <Spinner
@@ -44,6 +48,7 @@
         android:textColor="@color/basecolor"
         android:textSize="20sp"
 
+
         />
 
     <EditText
@@ -51,7 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="나이입력"
-        android:textColor="@color/basecolor"
         android:fontFamily="@font/gw"
         android:imeOptions="actionDone"
         android:inputType="number"
@@ -62,7 +66,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="신장입력"
-        android:textColor="@color/basecolor"
         android:fontFamily="@font/gw"
         android:imeOptions="actionDone"
         android:inputType="number"
